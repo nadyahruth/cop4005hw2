@@ -1,0 +1,12 @@
+C:\Users\Nadyah\Documents\GitHub\cop4005hw2\HW2\HW2\bin\Debug\HW2.exe.config
+C:\Users\Nadyah\Documents\GitHub\cop4005hw2\HW2\HW2\bin\Debug\HW2.exe
+C:\Users\Nadyah\Documents\GitHub\cop4005hw2\HW2\HW2\bin\Debug\HW2.pdb
+C:\Users\Nadyah\Documents\GitHub\cop4005hw2\HW2\HW2\bin\Debug\HW2.xml
+C:\Users\Nadyah\Documents\GitHub\cop4005hw2\HW2\HW2\obj\Debug\HW2.vbprojAssemblyReference.cache
+C:\Users\Nadyah\Documents\GitHub\cop4005hw2\HW2\HW2\obj\Debug\HW2.frmMain.resources
+C:\Users\Nadyah\Documents\GitHub\cop4005hw2\HW2\HW2\obj\Debug\HW2.Resources.resources
+C:\Users\Nadyah\Documents\GitHub\cop4005hw2\HW2\HW2\obj\Debug\HW2.vbproj.GenerateResource.cache
+C:\Users\Nadyah\Documents\GitHub\cop4005hw2\HW2\HW2\obj\Debug\HW2.vbproj.CoreCompileInputs.cache
+C:\Users\Nadyah\Documents\GitHub\cop4005hw2\HW2\HW2\obj\Debug\HW2.exe
+C:\Users\Nadyah\Documents\GitHub\cop4005hw2\HW2\HW2\obj\Debug\HW2.xml
+C:\Users\Nadyah\Documents\GitHub\cop4005hw2\HW2\HW2\obj\Debug\HW2.pdb
