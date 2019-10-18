@@ -60,19 +60,19 @@ Partial Class frmMain
         'munOpen
         '
         Me.munOpen.Name = "munOpen"
-        Me.munOpen.Size = New System.Drawing.Size(270, 34)
+        Me.munOpen.Size = New System.Drawing.Size(158, 34)
         Me.munOpen.Text = "Open"
         '
         'mnuSave
         '
         Me.mnuSave.Name = "mnuSave"
-        Me.mnuSave.Size = New System.Drawing.Size(270, 34)
+        Me.mnuSave.Size = New System.Drawing.Size(158, 34)
         Me.mnuSave.Text = "Save"
         '
         'mnuExit
         '
         Me.mnuExit.Name = "mnuExit"
-        Me.mnuExit.Size = New System.Drawing.Size(270, 34)
+        Me.mnuExit.Size = New System.Drawing.Size(158, 34)
         Me.mnuExit.Text = "Exit"
         '
         'ViewToolStripMenuItem
@@ -85,7 +85,7 @@ Partial Class frmMain
         'mnuStatistics
         '
         Me.mnuStatistics.Name = "mnuStatistics"
-        Me.mnuStatistics.Size = New System.Drawing.Size(270, 34)
+        Me.mnuStatistics.Size = New System.Drawing.Size(182, 34)
         Me.mnuStatistics.Text = "Statistics"
         '
         'btnLoad
@@ -136,6 +136,7 @@ Partial Class frmMain
         Me.lvwTaxData.Size = New System.Drawing.Size(1547, 480)
         Me.lvwTaxData.TabIndex = 6
         Me.lvwTaxData.UseCompatibleStateImageBehavior = False
+        Me.lvwTaxData.View = System.Windows.Forms.View.Details
         '
         'frmMain
         '

@@ -106,6 +106,12 @@ Public Class frmMain
                 For i = 0 To strFields.Length - 1 'build column headings
                     lvwTaxData.Columns.Add(strFields(i)) 'anthing that is ith will become headings in the listview
                 Next
+                '.Columns(RATING).Width = 80
+                '.Columns(BASE_SALARY).Width = 150
+                '.Columns(BASE_SALARY).TextAlign = HorizontalAlignment.Right
+                '.Columns(BONUS_PERCENT).Width = 80
+                '.Columns(BONUS_AMT).Width = 100
+                '.Columns(TOTAL_PAID).TextAlign = HorizontalAlignment.Right
 
                 ' do some formatting of the columns 
                 With lvwTaxData ' with sets a temp naming concept(shortcut)
@@ -113,14 +119,9 @@ Public Class frmMain
                     .Columns(LAST_NAME).Width = 100
                     .Columns(FIRST_NAME).Width = 100
                     .Columns(JOB_CODE).Width = 50
-                    .Columns(DEPTARTMENT).Width = 30
-                    .Columns(EVALUATION).Width = 80
-                    .Columns(RATING).Width = 80
-                    .Columns(BASE_SALARY).Width = 150
-                    .Columns(BONUS_PERCENT).Width = 80
-                    .Columns(BONUS_AMT).Width = 150
+                    .Columns(DEPTARTMENT).Width = 80
+                    .Columns(EVALUATION).Width = 90
 
-                    .Columns(TOTAL_PAID).TextAlign = HorizontalAlignment.Right
 
                 End With
             End If
@@ -150,6 +151,7 @@ Public Class frmMain
             Throw ex
         End Try
     End Sub
+
 
     Private Sub btnLoad_Click(sender As Object, e As EventArgs) Handles btnLoad.Click
         OpenFile()
