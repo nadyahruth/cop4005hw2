@@ -146,7 +146,7 @@ Public Class frmMain
                     End If
                     lviRow.SubItems.Add(lsiCal) ' add column to the row 
                 Next
-                Dim lsiEval As New ListViewItem.ListViewSubItem
+                Dim lsiEval As New ListViewItem.ListViewSubItem 'Evaluation 
                 Select Case lviRow.SubItems(EVALUATION).Text
                     Case Is >= 90
 
@@ -161,16 +161,15 @@ Public Class frmMain
 
                         lsiEval.Text = "Poor"
                 End Select
-                lviRow.SubItems.Add(lsiEval)
-                'adding the evaluation to the row
-                Dim lsiSal As New ListViewItem.ListViewSubItem
+                lviRow.SubItems.Add(lsiEval) 'adding the evaluation to the row
+                Dim lsiSal As New ListViewItem.ListViewSubItem 'Salary
                 Select Case lviRow.SubItems(BASE_SALARY).Text
-                    Case = "E428"
-                        lsiEval.Text = "42,000"
+                    Case JOB_CODE.Equals("E428")
+                        lsiSal.Text = "42,000"
                 End Select
-
                 lviRow.SubItems.Add(lsiSal) ' adding BaseSalary to the row
                 'now add the completed row to the listview
+
                 lvwTaxData.Items.Add(lviRow)
                 'UpdateStatistics(lviRow)
             End While
