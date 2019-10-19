@@ -30,7 +30,7 @@ Public Class frmMain
         End If
         strFileName = ofdOpen.FileName
         Try
-            ReadinputFile(strFileName)
+            ReadInputFile(strFileName)
         Catch exNotFound As FileNotFoundException
             'put error handling code here
             'message box for example then exit
@@ -106,51 +106,70 @@ Public Class frmMain
                 For i = 0 To strFields.Length - 1 'build column headings
                     lvwTaxData.Columns.Add(strFields(i)) 'anthing that is ith will become headings in the listview
                 Next
-                lvwTaxData.Columns.Add("Ratings")
-                lvwTaxData.Columns.Add("Base Salary")
-                lvwTaxData.Columns.Add("Bonus %")
-                lvwTaxData.Columns.Add("Bonus Amount")
-                lvwTaxData.Columns.Add("Total")
+                lvwTaxData.Columns.Add("Ratings") ' adds Rating Header
+                lvwTaxData.Columns.Add("Base Salary") ' adds Bonus Salary Header
+                lvwTaxData.Columns.Add("Bonus %") ' adds Bonus % Header
+                lvwTaxData.Columns.Add("Bonus Amount") ' adds Bonus Amount Headers
+                lvwTaxData.Columns.Add("Total Paid") ' adds Total Header
 
-                '.Columns(RATING).Width = 80
-                '.Columns(BASE_SALARY).Width = 150
-                '.Columns(BASE_SALARY).TextAlign = HorizontalAlignment.Right
-                '.Columns(BONUS_PERCENT).Width = 80
-                '.Columns(BONUS_AMT).Width = 100
-                '.Columns(TOTAL_PAID).TextAlign = HorizontalAlignment.Right
 
                 ' do some formatting of the columns 
                 With lvwTaxData ' with sets a temp naming concept(shortcut)
                     .Columns(EMP_ID).Width = 80
                     .Columns(LAST_NAME).Width = 100
                     .Columns(FIRST_NAME).Width = 100
-                    .Columns(JOB_CODE).Width = 50
+                    .Columns(JOB_CODE).Width = 80
                     .Columns(DEPTARTMENT).Width = 80
                     .Columns(EVALUATION).Width = 90
-
-
+                    .Columns(BASE_SALARY).Width = 130
+                    .Columns(BASE_SALARY).TextAlign = HorizontalAlignment.Right
+                    .Columns(BONUS_PERCENT).Width = 80
+                    .Columns(BONUS_AMT).Width = 100
+                    .Columns(BONUS_AMT).TextAlign = HorizontalAlignment.Right
+                    .Columns(TOTAL_PAID).Width = 100
+                    .Columns(TOTAL_PAID).TextAlign = HorizontalAlignment.Right
                 End With
             End If
             'now get data for each row
-            While Not fileIn.EndOfStream
-                strLineIn = fileIn.ReadLine
-                strFields = strLineIn.Split(",")
+            While Not fileIn.EndOfStream 'as long as there is more data to read
+                strLineIn = fileIn.ReadLine ' then read the line 
+                strFields = strLineIn.Split(",") ' split the data values by commas
                 'set up the first column value in a new listview item (the row)
-                Dim lviRow As New ListViewItem(strFields(0))
+                Dim lviRow As New ListViewItem(strFields(0)) 'given the value for the first column using strFields (goes under its spot in the array)
                 'now add the rest of the column values as subitems to that listview item 
-                For i = 1 To strFields.Length - 1
-                    Dim lsiCal As New ListViewItem.ListViewSubItem
-                    If i <> BASE_SALARY Or BONUS_AMT Or TOTAL_PAID Then
-                        lsiCal.Text = strFields(i)
+                For i = 1 To strFields.Length - 1 ' loop theough the headers 
+                    Dim lsiCal As New ListViewItem.ListViewSubItem ' add a subitem for every column 
+                    If i <> BASE_SALARY Or BONUS_AMT Or TOTAL_PAID Then ' if its not money
+                        lsiCal.Text = strFields(i) ' just add the text 
                     Else ' it is the money value so format it 
-                        lsiCal.Text = FormatCurrency(strFields(i), 0)
+                        lsiCal.Text = FormatCurrency(strFields(i), 0) ' 0 is for the decimal places, and we dont want any
                     End If
                     lviRow.SubItems.Add(lsiCal) ' add column to the row 
                 Next
+                Dim lsiEval As New ListViewItem.ListViewSubItem
                 Select Case lviRow.SubItems(EVALUATION).Text
-                    Case Is > 90
+                    Case Is >= 90
 
+                        lsiEval.Text = "Excellent"
+                    Case Is >= 80
+
+                        lsiEval.Text = "Good"
+                    Case Is >= 70
+
+                        lsiEval.Text = "Fair"
+                    Case Is >= 60
+
+                        lsiEval.Text = "Poor"
                 End Select
+                lviRow.SubItems.Add(lsiEval)
+                'adding the evaluation to the row
+                Dim lsiSal As New ListViewItem.ListViewSubItem
+                Select Case lviRow.SubItems(BASE_SALARY).Text
+                    Case = "E428"
+                        lsiEval.Text = "42,000"
+                End Select
+
+                lviRow.SubItems.Add(lsiSal) ' adding BaseSalary to the row
                 'now add the completed row to the listview
                 lvwTaxData.Items.Add(lviRow)
                 'UpdateStatistics(lviRow)
@@ -169,5 +188,9 @@ Public Class frmMain
 
     Private Sub munOpen_Click(sender As Object, e As EventArgs) Handles munOpen.Click
         OpenFile()
+    End Sub
+
+    Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
+        Application.Exit()
     End Sub
 End Class
