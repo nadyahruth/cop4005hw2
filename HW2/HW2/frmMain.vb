@@ -106,6 +106,12 @@ Public Class frmMain
                 For i = 0 To strFields.Length - 1 'build column headings
                     lvwTaxData.Columns.Add(strFields(i)) 'anthing that is ith will become headings in the listview
                 Next
+                lvwTaxData.Columns.Add("Ratings")
+                lvwTaxData.Columns.Add("Base Salary")
+                lvwTaxData.Columns.Add("Bonus %")
+                lvwTaxData.Columns.Add("Bonus Amount")
+                lvwTaxData.Columns.Add("Total")
+
                 '.Columns(RATING).Width = 80
                 '.Columns(BASE_SALARY).Width = 150
                 '.Columns(BASE_SALARY).TextAlign = HorizontalAlignment.Right
@@ -141,6 +147,10 @@ Public Class frmMain
                     End If
                     lviRow.SubItems.Add(lsiCal) ' add column to the row 
                 Next
+                Select Case lviRow.SubItems(EVALUATION).Text
+                    Case Is > 90
+
+                End Select
                 'now add the completed row to the listview
                 lvwTaxData.Items.Add(lviRow)
                 'UpdateStatistics(lviRow)
