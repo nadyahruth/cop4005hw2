@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports System.Math
 Public Class frmMain
     Private strFileName As String
     Private dblTotalInvValue As Double
@@ -121,9 +122,10 @@ Public Class frmMain
                     .Columns(JOB_CODE).Width = 80
                     .Columns(DEPTARTMENT).Width = 80
                     .Columns(EVALUATION).Width = 90
-                    .Columns(BASE_SALARY).Width = 130
+                    .Columns(BASE_SALARY).Width = 100
                     .Columns(BASE_SALARY).TextAlign = HorizontalAlignment.Right
                     .Columns(BONUS_PERCENT).Width = 80
+                    .Columns(BONUS_PERCENT).TextAlign = HorizontalAlignment.Right
                     .Columns(BONUS_AMT).Width = 100
                     .Columns(BONUS_AMT).TextAlign = HorizontalAlignment.Right
                     .Columns(TOTAL_PAID).Width = 100
@@ -163,13 +165,58 @@ Public Class frmMain
                 End Select
                 lviRow.SubItems.Add(lsiEval) 'adding the evaluation to the row
                 Dim lsiSal As New ListViewItem.ListViewSubItem 'Salary
-                Select Case lviRow.SubItems(BASE_SALARY).Text
-                    Case JOB_CODE.Equals("E428")
-                        lsiSal.Text = "42,000"
+                Select Case lviRow.SubItems(JOB_CODE).Text
+                    Case "E428"
+                        lsiSal.Text = "$42,000"
+                    Case "E538"
+                        lsiSal.Text = "$39,000"
+                    Case "E425"
+                        lsiSal.Text = "$38,000"
+                    Case "E513"
+                        lsiSal.Text = "$56,000"
+                    Case "E535"
+                        lsiSal.Text = "$57,500"
+                    Case "E601"
+                        lsiSal.Text = "$67,500"
                 End Select
                 lviRow.SubItems.Add(lsiSal) ' adding BaseSalary to the row
+                Dim lsiBPerc As New ListViewItem.ListViewSubItem
+                Select Case lviRow.SubItems(EVALUATION).Text
+                    Case Is >= 90
+                        lsiBPerc.Text = 5%
+                    Case Is >= 80
+                        lsiBPerc.Text = 5%
+                    Case Is >= 70
+                        lsiBPerc.Text = 5%
+                    Case Is >= 60
+                        lsiBPerc.Text = 0%
+                End Select
+                lviRow.SubItems.Add(lsiBPerc)
+                Dim lsiBAmnt As New ListViewItem.ListViewSubItem
+                Select Case lviRow.SubItems(EVALUATION).Text
+                    Case Is >= 90
+                        lsiBAmnt.Text = FormatCurrency(CInt(lsiSal.Text) * 0.05, 0)
+                    Case Is >= 80
+                        lsiBAmnt.Text = FormatCurrency(CInt(lsiSal.Text) * 0.05, 0)
+                    Case Is >= 70
+                        lsiBAmnt.Text = FormatCurrency(CInt(lsiSal.Text) * 0.05, 0)
+                    Case Is >= 60
+                        lsiBAmnt.Text = FormatCurrency(0, 0)
+                End Select
+                lviRow.SubItems.Add(lsiBAmnt)
+                Dim lsiTot As New ListViewItem.ListViewSubItem
+                Select Case lviRow.SubItems(EVALUATION).Text
+                    Case Is >= 90
+                        lsiTot.Text = FormatCurrency((CInt(lsiSal.Text) * 0.05) + lsiSal.Text, 0)
+                    Case Is >= 80
+                        lsiTot.Text = FormatCurrency((CInt(lsiSal.Text) * 0.05) + lsiSal.Text, 0)
+                    Case Is >= 70
+                        lsiTot.Text = FormatCurrency((CInt(lsiSal.Text) * 0.05) + lsiSal.Text, 0)
+                    Case Is >= 60
+                        lsiTot.Text = FormatCurrency(CInt(lsiSal.Text), 0)
+                End Select
+                lviRow.SubItems.Add(lsiTot)
                 'now add the completed row to the listview
-
                 lvwTaxData.Items.Add(lviRow)
                 'UpdateStatistics(lviRow)
             End While
