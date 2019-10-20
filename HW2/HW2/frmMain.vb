@@ -5,7 +5,7 @@ Public Class frmMain
     Private dblTotalInvValue As Double
     Private intTotalCount As Integer
     Private arrCategories As ArrayList
-    'Private Stats As frmStats
+    Private Stats As frmStats
 #Region "Column Contstants"
     'contansts to maanage the listView columns
     Private Const EMP_ID As Integer = 0
@@ -238,5 +238,10 @@ Public Class frmMain
 
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
         Application.Exit()
+    End Sub
+
+    Private Sub mnuStatistics_Click(sender As Object, e As EventArgs) Handles mnuStatistics.Click
+        ' when the stats button is clicked this will happen
+
     End Sub
 End Class
