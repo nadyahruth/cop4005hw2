@@ -2,8 +2,10 @@
 Imports System.Math
 Public Class frmMain
     Private strFileName As String
-    Private dblTotalInvValue As Double
-    Private intTotalCount As Integer
+    Private dblTotalInvValue As Double ' total amount 
+    Private intTotalCount As Integer ' how many in cat
+    Private intTotalEmploy As Integer ' total emply
+    Private intPoorRating As Integer ' total empl w/o  poor rating 
     Private arrCategories As ArrayList
     Private Stats As frmStats
 #Region "Column Contstants"
@@ -218,7 +220,7 @@ Public Class frmMain
                 lviRow.SubItems.Add(lsiTot)
                 'now add the completed row to the listview
                 lvwTaxData.Items.Add(lviRow)
-                'UpdateStatistics(lviRow)
+                UpdateStatistics(lviRow)
             End While
             fileIn.Close()
             fileIn.Dispose()
@@ -226,7 +228,29 @@ Public Class frmMain
             Throw ex
         End Try
     End Sub
-
+    Private Sub UpdateStatistics(aRow As ListViewItem)
+        Dim blnFountIt As Boolean
+        'first check if the new rows category already exist in the array list
+        For Each aCat As CCategory In arrCategories
+            'based on job code(below)
+            If aCat.CatName = aRow.SubItems(JOB_CODE).Text Then ' we already have it do update it  
+                'add the amount of bonuses show fro each in the category
+                aCat.TotalValue += CDbl(aRow.SubItems(BONUS_AMT).Text)
+                'in that column count how many times that job code appears 
+                aCat.TotalCount += 1
+                aCat.intPoorRating = aRow.SubItems(EVALUATION).Text > 60
+                intPoorRating += 1
+                blnFountIt = True
+                Exit For
+            End If
+        Next
+        If Not blnFountIt Then ' need to create a new CCat Object
+            Dim newCat As New CCategory(aRow.SubItems(JOB_CODE).Text, CDbl(aRow.SubItems(BONUS_AMT).Text))
+            arrCategories.Add(newCat)
+        End If
+        'intTotalEmploy += CDbl(aRow.SubItems().Text)
+        'intTotalCount += 1
+    End Sub
 
     Private Sub btnLoad_Click(sender As Object, e As EventArgs) Handles btnLoad.Click
         OpenFile()
@@ -242,6 +266,23 @@ Public Class frmMain
 
     Private Sub mnuStatistics_Click(sender As Object, e As EventArgs) Handles mnuStatistics.Click
         ' when the stats button is clicked this will happen
+        'Stats.lstCompanyStats.Items.Clear()
+        Stats.lstJobCodeStats.Items.Clear()
+        With Stats.lstJobCodeStats
+            .Items.Add("Total Amount of Emplyees Total= " & CStr(intTotalEmploy))
+            .Items.Add("Total inventory count = " & CStr(intTotalCount))
+            For Each aCat As CCategory In arrCategories
+                .Items.Add(aCat.CatName & ":")
+                .Items.Add("  Total Bonuses = " & FormatCurrency(aCat.TotalValue))
+                .Items.Add("  Total Employees = " & CStr(aCat.TotalCount))
+                .Items.Add("  Number Of Employees With Bonnus = " & CStr(aCat.intPoorRating))
+            Next
+        End With
+        Stats.ShowDialog()
+    End Sub
 
+    Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles Me.Load
+        arrCategories = New ArrayList
+        Stats = New frmStats
     End Sub
 End Class

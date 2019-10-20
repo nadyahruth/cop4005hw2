@@ -10,3 +10,4 @@ C:\Users\Nadyah\Documents\GitHub\cop4005hw2\HW2\HW2\obj\Debug\HW2.vbproj.CoreCom
 C:\Users\Nadyah\Documents\GitHub\cop4005hw2\HW2\HW2\obj\Debug\HW2.exe
 C:\Users\Nadyah\Documents\GitHub\cop4005hw2\HW2\HW2\obj\Debug\HW2.xml
 C:\Users\Nadyah\Documents\GitHub\cop4005hw2\HW2\HW2\obj\Debug\HW2.pdb
+C:\Users\Nadyah\Documents\GitHub\cop4005hw2\HW2\HW2\obj\Debug\HW2.frmStats.resources
